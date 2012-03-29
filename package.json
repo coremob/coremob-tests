@@ -1,0 +1,43 @@
+{
+  "name": "coremob-tests",
+  "description": "Core Mobile Community Group Tests",
+  "version": "0.1.0",
+  "homepage": "https://github.com/?/coremob-tests",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/?/coremob-tests.git"
+  },
+  "bugs": {
+    "url": "https://github.com/?/coremob-tests/issues"
+  },
+  "licenses": [
+    {
+      "type": "W3C 3-clause BSD License",
+      "url": "http://www.w3.org/Consortium/Legal/2008/03-bsd-license.html"
+    },
+    {
+      "type": "W3C Test Suite License",
+      "url": "http://www.w3.org/Consortium/Legal/2008/04-testsuite-license"
+    }
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "~0.2.6",
+    "js-yaml": "*",
+    "colors": "~0.6.0",
+    "underscore": "~1.2.4"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "contributors": [
+    "Matt Kelly <mk@fb.com> (url)",
+    "Tobie Langel <tobie@fb.com> (url)",
+    "Adam Sontag <adam@bocoup.com> (url)",
+    "Boaz Sender <boaz@bocoup.com> (url)",
+    "Rick Waldron <rick@bocoup.com> (url)"
+  ],
+  "author": "Facebook"
+}

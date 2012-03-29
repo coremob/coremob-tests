@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    path = require('path'),
+    colors = require('colors'),
+    _ = require('underscore');
+
+function getFileContent() {
+  var p = path.join.apply(path, arguments);
+  try {
+    return fs.readFileSync(p).toString();
+  } catch (e) {
+    return '';
+  }
+}
+
+if (process.argv.length < 3) {
+  console.log( 'Please specify a test "spec" to build.' );
+  process.exit();
+}
+
+var spec = process.argv[2].trim(),
+    p = path.join('tests', spec),
+    template,
+    content;
+
+if (path.existsSync(p)) {
+  template = fs.readFileSync('./suite/default_template.html').toString();
+
+  content = _.template(template, {
+    tests: getFileContent(p, 'test.js'),
+    js: getFileContent(p, 'fixture.js'),
+    html: getFileContent(p, 'fixture.html'),
+    css: getFileContent(p, 'fixture.css')
+  });
+
+  fs.writeFileSync(path.join(p, 'index.html'), content);
+
+  console.log('Built!'.green);
+} else {
+  console.log( ('Spec "' + spec + '" doesn\'t exist.').red );
+}

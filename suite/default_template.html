@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Coremob Test Development</title>
+  <script src="/resources/testharness.js"></script>
+  <script src="/resources/testharnessreport.js"></script>
+  <script src="/suite/_resources/h.js"></script>
+  <script>
+    (function(global) {
+      var _test = global.test,
+          _asyncTest = global.async_test,
+          _assert_true = global.assert_true;
+    
+      function test(arg0, arg1, opt) {
+        if (typeof arg0 === 'string') {
+          // This is the qUnit notation, reverse
+          // the first two args.
+          return _test(arg1, arg0, opt)
+        }
+        // Testharness notation. Keep things normal.
+        return _test(arg0, arg1, opt);
+      }
+    
+      function asyncTest(arg0, arg1, arg2) {
+        var a;
+        // The callee was passed a function.
+        // It must call it with an instance of
+        // asyncTest as first arg and return.
+        if (typeof arg1 === 'function') {
+          a = new _asyncTest(arg0, arg2);
+          arg1(a);
+          return; // could return a.
+        }
+        // Testharness notation.
+        return new _asyncTest(arg0, arg1);
+      }
+    
+      function assert(actual, description) {
+        return _assert_true(!!actual, description);
+      }
+    
+      global.test = test;
+      global.asyncTest = asyncTest;
+      global.async_test = asyncTest;
+      global.assert = assert;
+    })(this);
+  </script>
+  <style type="text/css">
+    #testharness-fixture {
+      position: absolute;
+      top: -10000px;
+      left: -10000px;
+    }
+    <%= css %>
+  </style>
+  <script>
+    <%= js %>
+  </script>
+</head>
+<body>
+<div id="log"></div>
+<div id="testharness-fixture">
+<%= html %>
+</div>
+<script>
+  <%= tests %>
+</script>
+</body>
+</html>
